@@ -21,6 +21,7 @@ import { getSigningOsmosisClient} from '@cosmology/core';
 import { signAndBroadcast } from 'cosmjs-utils';
 import { getOfflineSignerAmino } from 'cosmjs-utils';
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
+//import Long from 'long';
 
 const {
   swapExactAmountIn
@@ -96,6 +97,7 @@ const testfunc = async(argv : any) => {
       poolId,
       tokenOutDenom
     } = tradeRoute;
+    console.log(poolId);
     return {
       poolId,
       tokenOutDenom

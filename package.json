@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@chain-registry/osmosis": "^1.9.0",
+    "@cosmjs/stargate": "^0.29.5",
     "@cosmology/core": "^1.18.0",
     "cosmjs-types": "^0.6.1",
     "cosmjs-utils": "^0.1.0",
