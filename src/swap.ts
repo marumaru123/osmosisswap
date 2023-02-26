@@ -29,7 +29,7 @@ const {
 
 const rpcEndpoint = 'https://rpc.osmosis.zone/';
 
-const testfunc = async(argv : any) => {
+export default async function swap(argv: any) {
 
   console.log("aiueo");
   const mnemonic = 'idle city coral print adjust tape own mom situate woman devote win';
@@ -157,4 +157,3 @@ const testfunc = async(argv : any) => {
   console.log(res);
   
 }
-testfunc(process.argv);

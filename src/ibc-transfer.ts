@@ -15,7 +15,7 @@ const restEndpoint = 'https://lcd.osmosis.zone/';
 
 const mnemonic = 'idle city coral print adjust tape own mom situate woman devote win';
 
-const ibcTransfer = async(argv : any) => {
+export default async function ibcTransfer(argv : any) {
 
   const chain = chains.find(({ chain_name }) => chain_name === 'osmosis');
   const chain2 = chains.find(({ chain_name }) => chain_name === 'acrechain');
@@ -117,4 +117,3 @@ const ibcTransfer = async(argv : any) => {
   console.log(res);
 
 }
-ibcTransfer(process.argv);
