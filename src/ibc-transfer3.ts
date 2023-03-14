@@ -20,20 +20,9 @@ const mnemonic: string = process.env.MNEMONIC as string;
 const _sender: string   = process.env.SENDER as string;
 const _receiver: string = process.env.RECEIVER as string;
 
-const dispBalances = async(argv : any) => {
-  console.log("aiueo");
-  const client = await osmosis.ClientFactory.createLCDClient({
-    restEndpoint: restEndpoint
-  });
-  console.log("aiueo");
-  const accountBalances = await client.cosmos.bank.v1beta1.allBalances({
-    address: _sender
-  });
-  console.log("aiueo");
-  console.log(accountBalances);
-}
-
-const ibcTransfer = async(argv : any) => {
+export default async(token:any, val: any) => {
+  console.log(token);
+  console.log(val);
 
   const chain = chains.find(({ chain_name }) => chain_name === 'osmosis');
   const chain2 = chains.find(({ chain_name }) => chain_name === 'acrechain');
@@ -112,6 +101,7 @@ const ibcTransfer = async(argv : any) => {
   const _sequence = ibcClient.getSequence(address);
   const accountNumber = (await _sequence).accountNumber;
   const sequence = (await _sequence).sequence;
+  /*
 
   const _txRaw = await ibcClient.sign(
     address,
@@ -131,10 +121,8 @@ const ibcTransfer = async(argv : any) => {
 
   await assertIsDeliverTxSuccess(res);
   ibcClient.disconnect();
+ */
   //printOsmoTransactionResponse(res);
-  console.log(res);
+  //console.log(res);
 
 }
-dispBalances(process.argv);
-process.exit(0);
-//ibcTransfer(process.argv);
