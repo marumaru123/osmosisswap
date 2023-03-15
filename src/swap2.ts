@@ -14,6 +14,7 @@ import {
   lookupRoutesForTrade,
   getPoolsPricesPairs,
   calculateAmountWithSlippage,
+  getBalancerPools,
   noDecimals
 } from '@cosmology/core';
 
@@ -68,6 +69,11 @@ export default async function(tokens: any, val: any) {
     pairs,
     prettyPools
   } = await getPoolsPricesPairs(client);
+  const balancerPools = await getBalancerPools(client);
+  balancerPools.map((val2: any) => {
+	  console.log(val2.poolAssets[0].token.denom, val2.poolAssets[1].token.denom);
+  });
+  //console.log(balancerPools);
 
   const decimals = await tokens[0].getDecimals();
   const _denom0 = await tokens[0].getIbcdenom();
@@ -91,7 +97,7 @@ export default async function(tokens: any, val: any) {
     denom : _denom1 
   }
   const tokenOutAmount = '1';
-  console.log(pairs);
+  //console.log(pairs);
 
   const routes = lookupRoutesForTrade({
 //    pools,
