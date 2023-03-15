@@ -4,6 +4,7 @@
 //const IERC20 = JSON.parse(fs.readFileSync('abis/IERC20.json', 'utf8'))["abi"];
 
 export default class Token {
+
     private name: any;
     private ibcdenom: any;
     private decimals: any;
@@ -18,6 +19,10 @@ export default class Token {
 	token.ibcdenom = config["IBCDenom"];
 	token.decimals = config["decimals"];
 	return token;
+    }
+
+    async getName() {
+        return this.name;
     }
 
     async getIbcdenom() {

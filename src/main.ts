@@ -4,6 +4,7 @@ dotenv.config()
 import readUserInput from './readUserInput';
 import swap from './swap';
 import ibcTransfer3 from './ibc-transfer3'
+import getbalance2 from './get-balance'
 import Tokens from './Tokens'
 
 async function getTokenFromUserInput(tokens: any) {
@@ -13,6 +14,8 @@ async function getTokenFromUserInput(tokens: any) {
 }
 
 async function getBalance(tokens: any) {
+    await getbalance2(tokens, 2);
+	/*
     var tokenList = new Array();
     let token = await getTokenFromUserInput(tokens);
     while(typeof token !== "undefined") {
@@ -24,12 +27,13 @@ async function getBalance(tokens: any) {
     } else {
         console.log('*****');
     }
+   */
 }
 
 async function ibcTransfer2(tokens: any) {
-    const val = await readUserInput('How value?\n> ');
     let token = await getTokenFromUserInput(tokens);
     if (typeof token !== "undefined") {
+        const val = await readUserInput('How value?\n> ');
 	await ibcTransfer3(token, val); 
     }
 }
