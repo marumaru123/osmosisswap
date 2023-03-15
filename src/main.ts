@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 dotenv.config()
 
 import readUserInput from './readUserInput';
-import swap from './swap';
+import swap2 from './swap2';
 import ibcTransfer3 from './ibc-transfer3'
 import getbalance2 from './get-balance'
 import Tokens from './Tokens'
@@ -11,6 +11,19 @@ async function getTokenFromUserInput(tokens: any) {
     const userInput: any = await readUserInput('Which one?\n' + await tokens.toString() + '\n> ');
     let   token     = await tokens.getTokenFromIndex(Number(userInput) - 1);
     return token;
+}
+
+async function swap11(tokens: any) {
+    let token0 = await getTokenFromUserInput(tokens);
+    if (typeof token0 === "undefined") {
+        return;
+    }
+    let token1 = await getTokenFromUserInput(tokens);
+    if (typeof token1 === "undefined") {
+        return;
+    }
+    const val = await readUserInput('How value?\n> ');
+    await swap2([token0,token1], val); 
 }
 
 async function getBalance(tokens: any) {
@@ -53,7 +66,7 @@ async function ibcTransfer2(tokens: any) {
 		await ibcTransfer2(tokens); 
 		break;
 	    case '3':
-		await swap(1);
+		await swap11(tokens);
 		break;
             case 'X':
 		return;
