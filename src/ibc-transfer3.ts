@@ -9,6 +9,7 @@ import { coins, coin } from '@cosmjs/amino';
 import { getSigningOsmosisClient} from '@cosmology/core';
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { assertIsDeliverTxSuccess } from '@cosmjs/stargate';
+import { Dec, DecUtils, Int } from "@keplr-wallet/unit";
 
 const {
   transfer
@@ -65,10 +66,24 @@ export default async(token:any, val: any) => {
   const source_channel = 'channel-490';
   const stamp = Date.now();
   const timeoutInNanos = (stamp + 1.2e+6) * 1e+6; // TODO
+  const decimals = await token.getDecimals();
+  const actualAmount = (() => {
+      let dec = new Dec(val);
+      dec = dec.mul(DecUtils.getPrecisionDec(decimals));
+      return dec.truncate().toString();
+  })();
+  const _value = Number(val).toFixed(await token.getDecimals()).split('.');
+  const _value2 = _value[0] + _value[1];
+  const _denom = await token.getIbcdenom();
+  console.log(actualAmount, _denom);
+  console.log(_sender);
+  console.log(_receiver);
+  //console.log(account.address);
+  //console.log(toAccount.address);
   const msg = transfer({
     sourcePort: source_port,
     sourceChannel: source_channel,
-    token: coin('1000000000000000','ibc/BB936517F7E5D77A63E0ADB05217A6608B0C4CF8FBA7EA2F4BAE4107A7238F06'),
+    token: coin(actualAmount, _denom),
     //{
 //      denom: balances[0].denom,
 //      amount: balances[0].amount
@@ -101,7 +116,6 @@ export default async(token:any, val: any) => {
   const _sequence = ibcClient.getSequence(address);
   const accountNumber = (await _sequence).accountNumber;
   const sequence = (await _sequence).sequence;
-  /*
 
   const _txRaw = await ibcClient.sign(
     address,
@@ -116,13 +130,12 @@ export default async(token:any, val: any) => {
   );
 
   const txBytes = TxRaw.encode(_txRaw).finish();
-
   const res = await ibcClient.broadcastTx(txBytes);
 
   await assertIsDeliverTxSuccess(res);
   ibcClient.disconnect();
- */
+
   //printOsmoTransactionResponse(res);
-  //console.log(res);
+  console.log(res);
 
 }

@@ -40,7 +40,7 @@ async function ibcTransfer2(tokens: any) {
     console.log(tokens);
 
     while(true) {
-        const name = await readUserInput('Which one to choose?\n1.balance\n2.approve\n3.swap\n4.getReserves\n5.getAllReserves\n6.getAllPairs\nX.quit\n> ');
+        const name = await readUserInput('Which one to choose?\n1.balance\n2.ibc transfer\n3.swap\n4.getReserves\n5.getAllReserves\n6.getAllPairs\nX.quit\n> ');
     	switch (name) {
             case '1':
 		await getBalance(tokens);
